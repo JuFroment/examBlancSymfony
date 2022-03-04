@@ -1,0 +1,38 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Deloitte</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active btn btn-primary text-white me-3" aria-current="page"
+                           href="{{ path('default') }}">Accueil</a>
+                    </li>
+                    {% if app.user and app.user.hasRole('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-dark text-white me-3" href="{{ path('app_user_crud_index') }}">Panneau
+                                d'administration</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-success text-white" href="{{ path('new') }}">Ajouter un employé</a>
+                        </li>
+                    {% endif %}
+
+
+                </ul>
+            </div>
+            <div class="d-flex justify-content-end align-items-center">
+                {% if app.user %}
+                    <ul class="navbar-nav">
+                        <li class="nav-item me-5">Bonjour <strong>{{ app.user.prenom }} {{ app.user.nom }}</strong></li>
+                    </ul>
+                    <a href="{{ path('logout') }}" class="btn btn-danger">Se déconnecter</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</header>

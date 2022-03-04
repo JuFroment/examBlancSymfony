@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DefaultController!{% endblock %}
+
+{% block body %}
+    <div class="text-center my-5">
+        <h1><i class="fa-solid fa-list"></i> Annuaire des employés</h1>
+    </div>
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>Photo</th>
+                <th>Secteur</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr class=" my-3
+            {% if user.secteur =='Direction' %}
+                 table-danger border-3
+            {% elseif user.secteur =='Comptabilité' %}
+                table-primary border-3
+            {% elseif user.secteur =='Informatique' %}
+                table-warning border-3
+            {% elseif user.secteur =='Recrutement' %}
+                table-info border-3
+                {% endif %}">
+                    <td class="align-middle">{{ user.nom }}</td>
+                    <td class="align-middle">{{ user.prenom }}</td>
+                    <td class="align-middle">{{ user.email }}</td>
+                    <td class="align-middle"><img src="{{ user.photo }}" alt="photo de l'employé" class="imgMiniature"> </td>
+                    <td class="align-middle">{{ user.secteur }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
